@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		548381A51A8B05AC008C69C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381A41A8B05AC008C69C9 /* AppDelegate.swift */; };
-		548381A71A8B05AC008C69C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381A61A8B05AC008C69C9 /* ViewController.swift */; };
 		548381AA1A8B05AC008C69C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548381A81A8B05AC008C69C9 /* Main.storyboard */; };
 		548381AC1A8B05AD008C69C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548381AB1A8B05AD008C69C9 /* Images.xcassets */; };
 		548381AF1A8B05AD008C69C9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 548381AD1A8B05AD008C69C9 /* LaunchScreen.xib */; };
@@ -28,6 +27,9 @@
 		548381DD1A8B079B008C69C9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548381DC1A8B079B008C69C9 /* SystemConfiguration.framework */; };
 		548381DF1A8B07AB008C69C9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 548381DE1A8B07AB008C69C9 /* libz.dylib */; };
 		548381E11A8B07BE008C69C9 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 548381E01A8B07BE008C69C9 /* libsqlite3.dylib */; };
+		548381E41A8C358B008C69C9 /* MasterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381E31A8C358B008C69C9 /* MasterTableViewController.swift */; };
+		548381E61A8C35A3008C69C9 /* MasterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381E51A8C35A3008C69C9 /* MasterTableViewCell.swift */; };
+		548381E81A8C35BD008C69C9 /* AddNoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381E71A8C35BD008C69C9 /* AddNoteTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +46,6 @@
 		5483819F1A8B05AC008C69C9 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548381A31A8B05AC008C69C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		548381A41A8B05AC008C69C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		548381A61A8B05AC008C69C9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		548381A91A8B05AC008C69C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		548381AB1A8B05AD008C69C9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		548381AE1A8B05AD008C69C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -67,6 +68,9 @@
 		548381DE1A8B07AB008C69C9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		548381E01A8B07BE008C69C9 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		548381E21A8B085D008C69C9 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		548381E31A8C358B008C69C9 /* MasterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterTableViewController.swift; path = ../MasterTableViewController.swift; sourceTree = "<group>"; };
+		548381E51A8C35A3008C69C9 /* MasterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterTableViewCell.swift; path = ../MasterTableViewCell.swift; sourceTree = "<group>"; };
+		548381E71A8C35BD008C69C9 /* AddNoteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddNoteTableViewController.swift; path = ../AddNoteTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +140,9 @@
 			children = (
 				548381E21A8B085D008C69C9 /* Bridging-Header.h */,
 				548381A41A8B05AC008C69C9 /* AppDelegate.swift */,
-				548381A61A8B05AC008C69C9 /* ViewController.swift */,
+				548381E31A8C358B008C69C9 /* MasterTableViewController.swift */,
+				548381E51A8C35A3008C69C9 /* MasterTableViewCell.swift */,
+				548381E71A8C35BD008C69C9 /* AddNoteTableViewController.swift */,
 				548381A81A8B05AC008C69C9 /* Main.storyboard */,
 				548381AB1A8B05AD008C69C9 /* Images.xcassets */,
 				548381AD1A8B05AD008C69C9 /* LaunchScreen.xib */,
@@ -274,8 +280,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				548381A71A8B05AC008C69C9 /* ViewController.swift in Sources */,
 				548381A51A8B05AC008C69C9 /* AppDelegate.swift in Sources */,
+				548381E61A8C35A3008C69C9 /* MasterTableViewCell.swift in Sources */,
+				548381E81A8C35BD008C69C9 /* AddNoteTableViewController.swift in Sources */,
+				548381E41A8C358B008C69C9 /* MasterTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
