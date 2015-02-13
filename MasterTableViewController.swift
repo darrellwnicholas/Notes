@@ -8,8 +8,12 @@
 
 import UIKit
 
-class MasterTableViewController: UITableViewController, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate {
-
+class MasterTableViewController: UITableViewController, PFLogInViewControllerDelegate,
+    PFSignUpViewControllerDelegate {
+    
+    var noteObjects: NSMutableArray! = NSMutableArray()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +40,57 @@ class MasterTableViewController: UITableViewController, PFLogInViewControllerDel
             
             logInViewController.signUpController = signUpViewController
             self.presentViewController(logInViewController, animated: true, completion: nil)
+        } else {
+            self.fetchAllObjectFromLocalDatastore()
+            self.fetchAllObjects()
         }
+    }
+    
+    // create methods to fetch local datastore and Parse backend
+    func fetchAllObjectFromLocalDatastore() {
+        // create a query object on the class we named "Note" on Parse
+        var query: PFQuery = PFQuery(className: "Note")
+        
+        // query the local datastore not the backend
+        query.fromLocalDatastore()
+        // where the username is equal to the user logged into the app
+        query.whereKey("username", equalTo: PFUser.currentUser().username)
+        
+        // do the fetch in the background and we get an array back as an NSArray(see comment)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            
+            if (error == nil) {
+                var temp:NSArray = objects as NSArray // here's where we get the objects as an NSArray
+                self.noteObjects = temp.mutableCopy() as NSMutableArray // make a mutable copy and set it to our 'noteObjects'
+                self.tableView.reloadData() // then reload the table view with new fetched objects
+            } else {
+                println(error.userInfo)
+            }
+            
+        }
+    }
+    
+    func fetchAllObjects() {
+        // Pin is Parse's way of syncing, this just starts us off with a fresh set of objects. (Asynchronous)
+        PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
+        
+        // then query the background and get fresh set of objects and pin them all to the backend.
+        var query:PFQuery = PFQuery(className: "Note")
+        
+        query.whereKey("username", equalTo: PFUser.currentUser().username)
+        // find Asynchronously in the background
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if (error == nil) {
+                // syncs all objects to the backend
+                PFObject.pinAllInBackground(objects, block: nil)
+                
+                // call the method right before this one
+                self.fetchAllObjectFromLocalDatastore()
+            } else {
+                println(error.userInfo)
+            }
+        }
+        
     }
     
     //MARK: Login delegates
@@ -77,6 +131,8 @@ class MasterTableViewController: UITableViewController, PFLogInViewControllerDel
     func signUpViewControllerDidCancelSignUp(signUpController: PFSignUpViewController!) {
         println("User dismissed sign up.")
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,24 +144,47 @@ class MasterTableViewController: UITableViewController, PFLogInViewControllerDel
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return self.noteObjects.count
     }
 
-    /*
+ 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as MasterTableViewCell
 
-        // Configure the cell...
+        var object: PFObject = self.noteObjects.objectAtIndex(indexPath.row) as PFObject
+        
+        cell.masterTitleLabel.text = object["title"] as? String
+        cell.masterTextLabel.text = object["text"] as? String
 
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.performSegueWithIdentifier("editNote", sender: self) // now I can override the prepareForSegue method to do custom stuff needed for this segue.
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var upcoming: AddNoteTableViewController = segue.destinationViewController as AddNoteTableViewController
+        
+        if segue.identifier == "editNote" {
+            let indexPath: NSIndexPath = self.tableView.indexPathForSelectedRow()!
+            
+            var object:PFObject = self.noteObjects.objectAtIndex(indexPath.row) as PFObject
+            
+            upcoming.object = object
+            
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

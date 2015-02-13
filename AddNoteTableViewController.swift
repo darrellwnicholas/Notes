@@ -13,16 +13,34 @@ class AddNoteTableViewController: UITableViewController {
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var textView: UITextView!
     
-    
+    var object:PFObject!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        if (self.object != nil) {
+            
+            self.titleField?.text = self.object["title"] as? String
+            self.textView?.text = self.object["text"] as? String
+            
+        } else {
+            
+            self.object = PFObject(className: "Note")
+        }
+        
+        //--Recreating the above if-else code with notes for explanation--//
+        /*
+        // basically this class handles creation and editing of notes. This if-else determines which role we are playing
+        if (self.object != nil) { // editing an existing note...
+            // update UI with object that we are passing from MasterTableViewController to AddNoteTableViewController
+            self.titleField?.text = self.object["title"] as? String
+            self.textView?.text = self.object["text"] as? String
+        } else { // creating a new note and also editing it...
+            
+            self.object = PFObject(className: "Note")
+        }
+        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +48,26 @@ class AddNoteTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // this is where we will save our objects to the backend on Parse
+    @IBAction func saveAction(sender: UIBarButtonItem) {
+        
+        self.object["username"] = PFUser.currentUser().username
+        self.object["title"] =  self.titleField?.text
+        self.object["text"] = self.textView?.text
+        
+        self.object.saveEventually { (success, error) -> Void in
+            
+            if (error == nil) {
+                //not doing anything here but you could...
+            } else {
+                println(error.userInfo)
+            }
+            
+        }
+        self.navigationController?.popToRootViewControllerAnimated(true)
+    }
+    
+    
 
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
