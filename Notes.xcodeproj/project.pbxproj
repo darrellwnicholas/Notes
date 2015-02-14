@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		544857D01A8EEADB008FFE33 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 544857CF1A8EEADB008FFE33 /* libstdc++.6.dylib */; };
 		548381A51A8B05AC008C69C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548381A41A8B05AC008C69C9 /* AppDelegate.swift */; };
 		548381AA1A8B05AC008C69C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 548381A81A8B05AC008C69C9 /* Main.storyboard */; };
 		548381AC1A8B05AD008C69C9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 548381AB1A8B05AD008C69C9 /* Images.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		544857CF1A8EEADB008FFE33 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		5483819F1A8B05AC008C69C9 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		548381A31A8B05AC008C69C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		548381A41A8B05AC008C69C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				544857D01A8EEADB008FFE33 /* libstdc++.6.dylib in Frameworks */,
 				548381EC1A8C795B008C69C9 /* Social.framework in Frameworks */,
 				548381EA1A8C7951008C69C9 /* Accounts.framework in Frameworks */,
 				548381E11A8B07BE008C69C9 /* libsqlite3.dylib in Frameworks */,
@@ -115,6 +118,7 @@
 		548381961A8B05AC008C69C9 = {
 			isa = PBXGroup;
 			children = (
+				544857CF1A8EEADB008FFE33 /* libstdc++.6.dylib */,
 				548381EB1A8C795B008C69C9 /* Social.framework */,
 				548381E91A8C7951008C69C9 /* Accounts.framework */,
 				548381E01A8B07BE008C69C9 /* libsqlite3.dylib */,
@@ -198,6 +202,7 @@
 				5483819B1A8B05AC008C69C9 /* Sources */,
 				5483819C1A8B05AC008C69C9 /* Frameworks */,
 				5483819D1A8B05AC008C69C9 /* Resources */,
+				544857CE1A8EE9A8008FFE33 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -282,6 +287,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		544857CE1A8EE9A8008FFE33 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=/usr/local/bin:$PATH\ncd \"$PROJECT_DIR/parse\"\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5483819B1A8B05AC008C69C9 /* Sources */ = {
